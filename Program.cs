@@ -18,8 +18,6 @@
             PlaceraAllaSkepp(playerMap);
             PlaceraAllaSkepp(computerMap);
 
-            Console.WriteLine("Din Karta");
-            SkrivUtKarta(playerMap);
 
             Console.WriteLine();
 
@@ -35,13 +33,67 @@
                     break;
                 }
 
-                SpealreplaceraSkott(computerMap);
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Datorns karta");
+                Console.WriteLine("***********");
+                Console.ResetColor();
                 SkrivUtKarta(displayComputerMap);
-                
-                Thread.Sleep(500);
-                
-                DatornPlacerarSkott(playerMap);
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("***********");
+                Console.ResetColor();
+                Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Din Karta");
+                Console.WriteLine("***********");
+                Console.ResetColor();
                 SkrivUtKarta(playerMap);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("***********");
+                Console.ResetColor();
+                Console.WriteLine();
+
+                SpealreplaceraSkott(computerMap);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Datorns karta");
+                Console.WriteLine("***********");
+                Console.ResetColor();
+                SkrivUtKarta(displayComputerMap);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine();
+                Console.WriteLine("***********");
+                Console.ResetColor();
+
+                Thread.Sleep(500);
+                Console.WriteLine();
+                Console.WriteLine();  
+
+                DatornPlacerarSkott(playerMap);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Din Karta");
+                Console.WriteLine("***********");
+                Console.ResetColor();
+                SkrivUtKarta(playerMap);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("***********");
+                Console.ResetColor();
+                Console.WriteLine();
+
+
+                Console.WriteLine();
+                Console.WriteLine("Klicka på valfri tangent för nästa skott");
+                Console.ReadKey();
+                Console.Clear();
+
+                
+
+               
 
             }
 
@@ -49,11 +101,15 @@
 
             if (antalHitsSpelare == 3)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Grattis du vann!");
+                Console.Clear();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Tyvärr du förlorade!");
+                Console.ResetColor();
             }
 
                                    
@@ -126,7 +182,7 @@
                     {
                         Console.ResetColor();
                     }
-                    Console.Write(map[i, j]);
+                    Console.Write($"{map[i, j]} ");
                     Console.ResetColor();
                 }
                 Console.WriteLine();
@@ -170,12 +226,19 @@
             while (validInput == false)
             {
 
-                Console.WriteLine("Placera ditt skott. Ange X-kordinat (1-6)");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Placera ditt skott.");
+                Console.Write("Ange X-kordinat (1-6): ");
                 col = GetInt();
+                Console.ResetColor();
 
                 if (col < 1 || col > 6)
                 {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Ogiltig inmatning. Försök igen.");
+                    Console.ResetColor();
                     continue;
                 }
 
@@ -183,12 +246,18 @@
                 do
                 {
 
-                    Console.WriteLine("Placera ditt skott. Ange Y-kordinat (1-4)");
+                   Console.ForegroundColor = ConsoleColor.Yellow;
+                   Console.Write("Ange Y-kordinat (1-4): ");
+
                     row = GetInt();
+                    Console.ResetColor();
 
                     if (row < 1 || row > 4)
                     {
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Försök igen.");
+                        Console.ResetColor();
                     }
 
                 } while (row < 1 || row > 4);
@@ -199,7 +268,13 @@
                 // Kontrollera om spelaren redan har skjutit här
                 if (displayComputerMap[row, col] == "T" || displayComputerMap[row, col] == "-")
                 {
-                    Console.WriteLine("Redan skjutit där. Sikta om!");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine();
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine(" Redan skjutit där. Sikta om!");
+                    Console.WriteLine("-----------------------------");
+                    Console.ResetColor();
                     validInput = false;
                     continue;
 
@@ -209,19 +284,30 @@
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     displayComputerMap[row, col] = "T";
-                    Console.WriteLine("Träff!");
+                    Console.WriteLine();
+                    Console.WriteLine("-------------------");
+                    Console.WriteLine(" Snyggt du träffa! ");
+                    Console.WriteLine("-------------------");
                     antalHitsSpelare++;
+                    Console.ResetColor();
 
                 }
                 else if (map[row, col] == " ")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     displayComputerMap[row, col] = "-";
-                    Console.WriteLine("Miss!");
+                    Console.WriteLine();
+                    Console.WriteLine("-------------");
+                    Console.WriteLine(" Du missade! ");
+                    Console.WriteLine("-------------");
+                    Console.ResetColor();
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine();
                     Console.WriteLine("Något gick fel. Försök igen.");
+                    Console.ResetColor();
                     continue;
                 }
 
@@ -250,23 +336,29 @@
                 else if (map[row, col] == "O")
                 {
 
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     playerMap[row, col] = "T";
-                    Console.WriteLine("Datorn träffa!");
+                    Console.WriteLine("----------------");
+                    Console.WriteLine(" Datorn träffa! ");
+                    Console.WriteLine("----------------");
                     antalHitsDator++;
+                    Console.ResetColor();
                     break;
 
 
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     playerMap[row, col] = "-";
-                    Console.WriteLine("Datorn missa!");
+                    Console.WriteLine("-----------------");
+                    Console.WriteLine(" Datorn missade! ");
+                    Console.WriteLine("-----------------");
+                    Console.ResetColor();
                     break;
                 }
             }
-            Console.WriteLine();
+            
 
 
         }
