@@ -33,7 +33,6 @@
                     break;
                 }
 
-
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Datorns karta");
                 Console.WriteLine("***********");
@@ -91,9 +90,7 @@
                 Console.ReadKey();
                 Console.Clear();
 
-                
 
-               
 
             }
 
@@ -101,14 +98,18 @@
 
             if (antalHitsSpelare == 3)
             {
+                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Grattis du vann!");
-                Console.Clear();
+                Console.WriteLine("Vill du spela igen så starta om programmet.");
+                Console.ResetColor();
             }
             else
             {
+                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Tyvärr du förlorade!");
+                Console.WriteLine("Vill du spela igen så starta om programmet.");
                 Console.ResetColor();
             }
 
